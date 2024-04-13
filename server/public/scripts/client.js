@@ -13,13 +13,23 @@ function fetchAndRenderToDo(){
         tasksToDOM.innerHTML = ''; // clears the table for the toDos
 
         for (let each of toDos){
-            tasksToDOM.innerHTML += `
+            if (each.isComplete === 'true'){
+                tasksToDOM.innerHTML += `
+            <tr class="completed" data-testid="toDoItem">
+                <td>${each.text}</td>
+                <td><button onclick="markComplete(${each.id})" data-testid="completeButton">Mark Complete</button></td>
+                <td><button onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
+            </tr>
+            `
+            } else {
+                tasksToDOM.innerHTML += `
             <tr data-testid="toDoItem">
                 <td>${each.text}</td>
                 <td><button onclick="markComplete(${each.id})" data-testid="completeButton">Mark Complete</button></td>
                 <td><button onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
             </tr>
             `
+            } 
         }
     })
 }
@@ -53,14 +63,11 @@ axios({
 })
 }
 
-function markToDoComplete (toDOId){
+function markComplete (toDOId){
     // use axios to make a PUT request to todos/:id
     axios({
-        method: 'PUT'
-        url: `/todos/${toDOId}`,
-        data: {
-        isComplete: isComplete
-        }
+        method: 'PUT',
+        url: `/todos/${toDOId}`
     }).then((response) => {
         fetchAndRenderToDo(); 
     }).catch((error) => {

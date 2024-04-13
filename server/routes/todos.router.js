@@ -65,34 +65,23 @@ router.delete('/:todo_id', (req, res) => {
 
 // PUT 
 
-router.put('/todos/:id', (req, res) => {
+router.put('/:todo_id', (req, res) => {
     //get the id from the params, store in a variable called idOfToDo
-    let id = req.params.id; 
-    console.log('To do ID is:', id);
-    let isComplete = req.params.isComplete; 
-    let sqlText=''; 
-
-    if (isComplete === 'true'){
-
-    }
-
+    let id = req.params.todo_id; 
+    sqlText = `
+    UPDATE todos
+    SET "isComplete"=TRUE
+    WHERE id=$1
+    `
+    pool.query(sqlText, [id])
+    .then(() => {
+        res.sendStatus(200)
+    })
+    .catch((error)=> {
+        console.log('Error on PUT route /todos/:id', error);
+        res.sendStatus(500);
+    })
 })
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;
