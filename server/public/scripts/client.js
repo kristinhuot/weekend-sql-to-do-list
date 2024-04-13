@@ -16,7 +16,7 @@ function fetchAndRenderToDo(){
             tasksToDOM.innerHTML += `
             <tr data-testid="toDoItem">
                 <td>${each.text}</td>
-                <td><button ata-testid="completeButton">${each.isComplete}</button></td>
+                <td><button onclick="markComplete(${each.id})" data-testid="completeButton">Mark Complete</button></td>
                 <td><button onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
             </tr>
             `
@@ -51,4 +51,20 @@ axios({
 }).catch((error) => {
     console.log('deleteToDO broke and this is why:', error);
 })
+}
+
+function markToDoComplete (toDOId){
+    // use axios to make a PUT request to todos/:id
+    axios({
+        method: 'PUT'
+        url: `/todos/${toDOId}`,
+        data: {
+        isComplete: isComplete
+        }
+    }).then((response) => {
+        fetchAndRenderToDo(); 
+    }).catch((error) => {
+        console.log('Error in PUT route:', error);
+        alert('Error updating to do to complete'); 
+    })
 }

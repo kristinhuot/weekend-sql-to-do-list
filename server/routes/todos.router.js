@@ -63,7 +63,22 @@ router.delete('/:todo_id', (req, res) => {
         })
 })
 
+// PUT 
 
+router.put('/todos/:id', (req, res) => {
+    //get the id from the params, store in a variable called idOfToDo
+    let id = req.params.id; 
+    console.log('To do ID is:', id);
+    let isComplete = req.params.isComplete; 
+    let sqlText=''; 
+
+    if (isComplete === 'true'){
+
+    }
+
+})
+
+ 
 
 
 
