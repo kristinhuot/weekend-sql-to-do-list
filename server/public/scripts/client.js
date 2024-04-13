@@ -16,8 +16,8 @@ function fetchAndRenderToDo(){
             tasksToDOM.innerHTML += `
             <tr data-testid="toDoItem">
                 <td>${each.text}</td>
-                <td><button>${each.isComplete}</button></td>
-                <td><button>Delete</button></td>
+                <td><button ata-testid="completeButton">${each.isComplete}</button></td>
+                <td><button onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
             </tr>
             `
         }
@@ -39,4 +39,16 @@ axios({
 }).catch((error) => {
     console.log('Error in POST route', error);
 }); 
+}
+
+function deleteToDo(toDOId){
+console.log('To do ID is:', toDOId);
+axios({
+    method: 'DELETE',
+    url: `/todos/${toDOId}`
+}).then((response) => {
+    fetchAndRenderToDo();
+}).catch((error) => {
+    console.log('deleteToDO broke and this is why:', error);
+})
 }
