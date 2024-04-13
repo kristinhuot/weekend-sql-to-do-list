@@ -13,7 +13,7 @@ function fetchAndRenderToDo(){
         tasksToDOM.innerHTML = ''; // clears the table for the toDos
 
         for (let each of toDos){
-            if (each.isComplete === 'true'){
+            if (each.isComplete === true){
                 tasksToDOM.innerHTML += `
             <tr class="completed" data-testid="toDoItem">
                 <td>${each.text}</td>
