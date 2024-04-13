@@ -6,12 +6,30 @@
   <link rel="stylesheet" href="style.css">
   <script src="./scripts/axios.js"></script>
   <script src="./scripts/client.js"></script>
-  <title>SQL TO-DO List</title>
+  <title>My TO-DO List</title>
 </head>
 <body>
   <header>
-    <h1>SQL TO-DO List</h1>
+    <h1>My To-Do List</h1>
   </header>
-
+  <main>
+      <form>
+        <input
+        data-testid="toDoTextInput"
+        id="toDoInput"
+        placeholder="Add a new to-do list item here"
+        type="text">
+        <button data-testid="submitButton">Submit</button>
+      </form>
+    <h2>My Upcoming To-Do Items</h2>
+      <table>
+        <thead>
+          <th>To-Do Description</th>
+          <th>Complete?</th>
+          <th>Delete</th>
+        </thead>
+        <tbody id="toDoTable"></tbody>
+      </table>
+  </main>
 </body>
 </html>
