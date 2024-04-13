@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
-
 const todos = require('./routes/todos.router.js');
-
 let PORT = process.env.PORT || 5001;
 
+// Middleware
+app.use(express.json());
+app.use(express.static('server/public'));
 
-
+// Express routes 
+app.use('/todos', todos); 
 
 
 
