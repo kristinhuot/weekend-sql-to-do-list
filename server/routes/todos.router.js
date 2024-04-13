@@ -21,6 +21,26 @@ router.get('/', (req, res) =>{
         })
 }); 
 
+// POST 
+router.post('/', (req, res) => {
+    console.log('req.body is', req.body);
+    const todo= req.body.toDoText; 
+
+    const sqlText = `
+    INSERT INTO todos
+    (text)
+    VALUES
+    ($1);
+    `
+    pool.query(sqlText, [todo])
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch((dbError) => {
+            console.log('Error in POST /todos', dbError);
+            res.sendStatus(500); 
+        })
+}); 
 
 
 

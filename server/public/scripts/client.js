@@ -16,7 +16,7 @@ function fetchAndRenderToDo(){
             tasksToDOM.innerHTML += `
             <tr data-testid="toDoItem">
                 <td>${each.text}</td>
-                <td>${each.isComplete}</td>
+                <td><button>${each.isComplete}</button></td>
                 <td><button>Delete</button></td>
             </tr>
             `
@@ -24,3 +24,19 @@ function fetchAndRenderToDo(){
     })
 }
 fetchAndRenderToDo(); 
+
+function addToDo(event){
+    event.preventDefault(); 
+let toDoText= document.getElementById("toDoInput").value
+
+axios({
+    method: 'POST',
+    url: '/todos',
+    data: {toDoText}
+}).then((response) => {
+    newToDo = ''; 
+    fetchAndRenderToDo(); 
+}).catch((error) => {
+    console.log('Error in POST route', error);
+}); 
+}
