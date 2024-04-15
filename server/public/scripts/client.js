@@ -17,16 +17,16 @@ function fetchAndRenderToDo(){
                 tasksToDOM.innerHTML += `
             <tr class="completed" data-testid="toDoItem">
                 <td>${each.text}</td>
-                <td><button onclick="markComplete(${each.id})" data-testid="completeButton">Mark Complete</button></td>
-                <td><button onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
+                <td><button class="btn btn-primary disabled" onclick="markComplete(${each.id})" data-testid="completeButton">Completed!</button></td>
+                <td><button class="btn-danger" onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
             </tr>
             `
             } else {
                 tasksToDOM.innerHTML += `
             <tr data-testid="toDoItem">
                 <td>${each.text}</td>
-                <td><button onclick="markComplete(${each.id})" data-testid="completeButton">Mark Complete</button></td>
-                <td><button onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
+                <td><button class="btn-success" onclick="markComplete(${each.id})" data-testid="completeButton">Mark Complete</button></td>
+                <td><button class="btn-danger" onclick="deleteToDo(${each.id})" data-testid="deleteButton">Delete</button></td>
             </tr>
             `
             } 
@@ -35,21 +35,26 @@ function fetchAndRenderToDo(){
 }
 fetchAndRenderToDo(); 
 
+function clearInputs(){
+    document.getElementById("toDoInput").value = '';
+}
+
 function addToDo(event){
     event.preventDefault(); 
-let toDoText= document.getElementById("toDoInput").value
+let toDoText= document.getElementById("toDoInput").value; 
 
 axios({
     method: 'POST',
     url: '/todos',
     data: {toDoText}
 }).then((response) => {
-    newToDo = ''; 
+    clearInputs(); 
     fetchAndRenderToDo(); 
 }).catch((error) => {
     console.log('Error in POST route', error);
 }); 
 }
+
 
 function deleteToDo(toDOId){
 console.log('To do ID is:', toDOId);

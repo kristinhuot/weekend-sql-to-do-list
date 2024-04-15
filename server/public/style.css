@@ -1,4 +1,11 @@
 .completed{
     text-decoration:line-through; 
+    background-color: #d9ecd0;
 }
-
+h2{
+    text-align:center; 
+ 
+}
+body{
+   background-color: #878f99 !important; 
+}

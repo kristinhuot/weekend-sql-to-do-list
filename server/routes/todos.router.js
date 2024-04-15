@@ -7,7 +7,7 @@ router.get('/', (req, res) =>{
     //SQL query to send to the DB
     const sqlText = `
     SELECT * FROM todos
-    ORDER BY text
+    ORDER BY "isComplete"
     `
     // use pool object to query the DB
     pool.query(sqlText)
